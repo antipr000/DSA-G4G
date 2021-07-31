@@ -32,10 +32,10 @@ public class Trees {
 
 class NAryTreeMethods{
     ArrayList<Integer> []tree;
-
+    int[] val;
     NAryTreeMethods(int n){
         tree = new ArrayList[n+1];
-
+        val = new int[n+1];
     }
 
     public void addAEdge(int u, int v){
@@ -81,6 +81,26 @@ class NAryTreeMethods{
                 }
             }
         }
+    }
+
+    int maxHeightInSubtree(int curr, int parent){
+        int maxVal = 0;
+        for(int v: tree[curr]){
+            if(v != parent){
+                Math.max(maxVal, maxHeightInSubtree(v, curr) + 1);
+            }
+        }
+        return maxVal;
+    }
+
+    int sumSubtree(int curr, int parent){
+        int sum = val[curr];
+        for(int v: tree[curr]){
+            if(v != parent){
+                sum += sumSubtree(v, curr);
+            }
+        }
+        return sum;
     }
 }
 
