@@ -1,13 +1,35 @@
 import java.util.*;
 import java.util.LinkedList;
 
+class WeightedNode{
+    int node;
+    int wt;
+
+    WeightedNode(int n, int w){
+        node = n;
+        wt = w;
+    }
+}
+
 public class Graphs {
     ArrayList<Integer> []graph;
+    ArrayList<WeightedNode> []weightedGraph;
+
     boolean [] visited;
+    int N;
+    int [] distance;
 
     Graphs(int n){
+        N = n+1;
         graph = new ArrayList[n+1];
+        weightedGraph = new ArrayList[n+1];
         visited = new boolean[n+1];
+        distance = new int[n+1];
+    }
+
+    public void addWeightedEdge(int u, int v, int w){
+        weightedGraph[u].add(new WeightedNode(v, w));
+        weightedGraph[v].add(new WeightedNode(u, w));
     }
 
     public void addAEdge(int u, int v){
@@ -38,6 +60,19 @@ public class Graphs {
                     q.add(v);
                 }
             }
+        }
+    }
+
+    void dijkstra(int src){
+        for(int i=0;i<N;i++){
+            distance[i] = Integer.MAX_VALUE;
+        }
+        TreeSet<WeightedNode> pq = new TreeSet<>();
+        pq.add(new WeightedNode(src, 0));
+        distance[src] = 0;
+
+        while (!pq.isEmpty()){
+
         }
     }
 }
